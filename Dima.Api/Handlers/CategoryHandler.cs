@@ -24,7 +24,7 @@ public class CategoryHandler (AppDbContext context) : ICategoryHandler
             
             return new Response<Category?>(category, 201, "Categoria criada com sucesso.");
         }
-        catch (Exception e)
+        catch
         {
            return new Response<Category?>(null, 500, "Falha ao criar categoria.");
         }
