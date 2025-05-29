@@ -7,7 +7,7 @@ namespace Dima.Web.Security;
 
 public class CookieAuthenticationStateProvider(IHttpClientFactory clientFactory) : AuthenticationStateProvider, ICookieAuthenticationStateProvider
 {
-    private bool _isAuthenticated = false;
+    private bool _isAuthenticated;
     private readonly HttpClient _client = clientFactory.CreateClient(Configuration.HttpClientName);
     
     public async Task<bool> CheckAuthenticationAsync()
@@ -69,7 +69,7 @@ public class CookieAuthenticationStateProvider(IHttpClientFactory clientFactory)
             return claims;
         }
 
-        claims.AddRange(from role in roles ?? [] where !string.IsNullOrEmpty(role.Type) && !string.IsNullOrEmpty(role.Value) select new Claim(role.Type, role.Value, role.ValueType, role.Issuer, role.OriginalIssuer));
+        claims.AddRange(from role in roles ?? [] where !string.IsNullOrEmpty(role.Type) && !string.IsNullOrEmpty(role.Value) select new Claim(role.Type!, role.Value!, role.ValueType, role.Issuer, role.OriginalIssuer));
 
         return claims;
     }
