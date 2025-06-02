@@ -27,4 +27,8 @@
     <ProjectReference Include="..\Dima.Core\Dima.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Transactions\" />
+  </ItemGroup>
+
 </Project>
