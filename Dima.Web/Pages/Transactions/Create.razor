@@ -19,5 +19,31 @@
                       HelperText="Informe o valor do lançamento"
                       @bind-Value="InputModel.Amount"
                       For="@(( )=> InputModel.Amount)"/>
+        
+        <MudDatePicker Label="Data do lançamento"
+                       @bind-Date="@InputModel.PaidOrReceivedAt"
+                       HelperText="Selecione a data do lançamento"/>
+        
+        <MudSelect T="ETransactionType" Label="Tipo de lançamento"
+                   AnchorOrigin="Origin.BottomCenter"
+                   @bind-Value="InputModel.Type">
+            <MudSelectItem T="ETransactionType" Value="ETransactionType.Deposit">Entrada</MudSelectItem>
+            <MudSelectItem T="ETransactionType" Value="ETransactionType.Withdraw">Saida</MudSelectItem>
+        </MudSelect>
+        
+        <MudSelect T="long" Label="Categoria" @bind-Value="InputModel.CategoryId"
+                   AnchorOrigin="Origin.BottomCenter">
+            @foreach(var category in Categories)
+            {
+                <MudSelectItem T="long" Value="@category.Id">@category.Title</MudSelectItem>
+            }
+        </MudSelect>
+        
+        <MudButton ButtonType="ButtonType.Submit"
+                   Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   Class="mt-4">
+            Salvar
+        </MudButton>
     </EditForm>
 </MudPaper>
