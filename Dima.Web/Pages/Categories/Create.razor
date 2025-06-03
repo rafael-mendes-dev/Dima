@@ -9,13 +9,13 @@
         <MudTextField Label="Título"
                       HelperText="Campo obrigatório"
                       @bind-Value="InputModel.Title"
-                      For="@(() => InputModel.Title)}"></MudTextField>
+                      For="@(() => InputModel.Title)"></MudTextField>
 
         <MudTextField Label="Descrição"
                       Lines="5"
                       HelperText="Campo obrigatório"
                       @bind-Value="InputModel.Description"
-                      For="@(() => InputModel.Description)}"></MudTextField>
+                      For="@(() => InputModel.Description)"></MudTextField>
         @if (IsBusy)
         {
             <MudProgressCircular Color="Color.Info" Indeterminate="true"/>
