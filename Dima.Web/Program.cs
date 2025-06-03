@@ -1,3 +1,4 @@
+using System.Globalization;
 using Dima.Core.Handlers;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -31,5 +32,10 @@ builder.Services.AddHttpClient(Configuration.HttpClientName, opt =>
 builder.Services.AddTransient<IAccountHandler, AccountHandler>();
 builder.Services.AddTransient<ITransactionHandler, TransactionHandler>();
 builder.Services.AddTransient<ICategoryHandler, CategoryHandler>();
+
+builder.Services.AddLocalization();
+
+CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pt-br");
+CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("pt-br");
 
 await builder.Build().RunAsync();
