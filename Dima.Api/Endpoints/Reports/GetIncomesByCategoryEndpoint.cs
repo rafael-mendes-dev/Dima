@@ -1,11 +1,27 @@
-﻿using Dima.Api.Common.Api;
+﻿using System.Security.Claims;
+using Dima.Api.Common.Api;
+using Dima.Core.Handlers;
+using Dima.Core.Models.Reports;
+using Dima.Core.Requests.Reports;
+using Dima.Core.Responses;
 
 namespace Dima.Api.Endpoints.Reports;
 
 public class GetIncomesByCategoryEndpoint : IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app)
+        => app.MapGet("/incomes", HandleAsync)
+            .Produces<Response<List<IncomesByCategory>?>>();
+
+    private static async Task<IResult> HandleAsync(
+        ClaimsPrincipal user,
+        GetIncomesByCategoryRequest request,
+        IReportHandler handler)
     {
-        throw new NotImplementedException();
+        request.UserId = user.Identity?.Name ?? string.Empty;
+        var result = await handler.GetIncomesByCategoryReportAsync(request);
+        return result.IsSucess
+            ? TypedResults.Ok(result)
+            : TypedResults.BadRequest(result);
     }
 }
