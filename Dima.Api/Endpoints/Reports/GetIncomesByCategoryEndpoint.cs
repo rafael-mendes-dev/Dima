@@ -15,10 +15,12 @@ public class GetIncomesByCategoryEndpoint : IEndpoint
 
     private static async Task<IResult> HandleAsync(
         ClaimsPrincipal user,
-        GetIncomesByCategoryRequest request,
         IReportHandler handler)
     {
-        request.UserId = user.Identity?.Name ?? string.Empty;
+        var request = new GetIncomesByCategoryRequest
+        {
+            UserId = user.Identity?.Name ?? string.Empty
+        };
         var result = await handler.GetIncomesByCategoryReportAsync(request);
         return result.IsSucess
             ? TypedResults.Ok(result)

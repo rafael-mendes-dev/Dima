@@ -15,10 +15,12 @@ public class GetIncomesAndExpensesEndpoint : IEndpoint
 
     private static async Task<IResult> HandleAsync(
         ClaimsPrincipal user,
-        GetIncomesAndExpensesRequest request,
         IReportHandler handler)
     {
-        request.UserId = user.Identity?.Name ?? string.Empty;
+        var request = new GetIncomesAndExpensesRequest
+        {
+            UserId = user.Identity?.Name ?? string.Empty
+        };
         var result = await handler.GetIncomesAndExpensesReportAsync(request);
         return result.IsSucess
             ? TypedResults.Ok(result)
